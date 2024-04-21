@@ -1,0 +1,6 @@
+rootProject.name = 'apiGateway'
+
+include 'microservicio1'
+include 'microservicios2'
+include 'eurekaserver'
+include 'apiigateway'
