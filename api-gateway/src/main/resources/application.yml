@@ -13,16 +13,22 @@ spring:
             uri: lb://microservicios2
             predicates:
               - Path=/api/microservicio2/**
+          - id: tienda
+            uri: http://localhost:8083
+            predicates:
+              - Path=/api/v1/products/**
+            filters:
+              - AddResponseHeader=X-Response-filter, gateway
+          - id: tienda2
+            uri: http://localhost:8083
+            predicates:
+              - Path=/api/v1/customers
+              - Method=GET
+            filters:
+              - RedirectTo=301, https://jsonplaceholder.typicode.com/users
 
 server:
   port: 8060
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8070/eureka/
-  instance:
-    preferIpAddress: true
 
 logging:
   level:
