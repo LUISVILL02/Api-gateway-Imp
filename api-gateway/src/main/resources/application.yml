@@ -14,13 +14,13 @@ spring:
             predicates:
               - Path=/api/microservicio2/**
           - id: tienda
-            uri: http://localhost:8083
+            uri: lb://ventas
             predicates:
               - Path=/api/v1/products/**
             filters:
               - AddResponseHeader=X-Response-filter, gateway
           - id: tienda2
-            uri: http://localhost:8083
+            uri: lb://ventas
             predicates:
               - Path=/api/v1/customers
               - Method=GET
@@ -34,5 +34,13 @@ logging:
   level:
     root: info
     org.springframework.cloud.gateway: trace
+
+eureka:
+    client:
+        serviceUrl:
+          defaultZone: http://localhost:8070/eureka/
+    instance:
+        preferIpAddress: true
+
 
 
